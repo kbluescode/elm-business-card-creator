@@ -8272,17 +8272,24 @@ var _user$project$Main$update = F2(
 				return _elm_lang$core$Native_Utils.update(
 					model,
 					{description: _p0._0});
-			default:
+			case 'UpdatePhoneNum':
 				return _elm_lang$core$Native_Utils.update(
 					model,
 					{phone_number: _p0._0});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{color: _p0._0});
 		}
 	});
-var _user$project$Main$model = {title: 'Derp Derpington', phone_number: '(555) 555-5555', description: 'Attorney at Law.'};
-var _user$project$Main$Model = F3(
-	function (a, b, c) {
-		return {title: a, phone_number: b, description: c};
+var _user$project$Main$model = {title: 'Derp Derpington', phone_number: '(555) 555-5555', description: 'Attorney at Law.', color: 'is-dark'};
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {title: a, phone_number: b, description: c, color: d};
 	});
+var _user$project$Main$UpdateColor = function (a) {
+	return {ctor: 'UpdateColor', _0: a};
+};
 var _user$project$Main$UpdatePhoneNum = function (a) {
 	return {ctor: 'UpdatePhoneNum', _0: a};
 };
@@ -8305,7 +8312,8 @@ var _user$project$Main$view = function (model) {
 					_0: _elm_lang$html$Html_Attributes$id('title'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('hero is-centered is-dark is-bold'),
+						_0: _elm_lang$html$Html_Attributes$class(
+							A2(_elm_lang$core$Basics_ops['++'], 'hero is-centered is-bold ', model.color)),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -8438,7 +8446,173 @@ var _user$project$Main$view = function (model) {
 									}
 								}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$fieldset,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$label,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$input,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$name('background'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$checked(true),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$type_('radio'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onClick(
+																	_user$project$Main$UpdateColor('is-dark')),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												},
+												{ctor: '[]'}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Black'),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$input,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$name('background'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$type_('radio'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onClick(
+																	_user$project$Main$UpdateColor('is-success')),
+																_1: {ctor: '[]'}
+															}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Green'),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$label,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$input,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$name('background'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$type_('radio'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Events$onClick(
+																		_user$project$Main$UpdateColor('is-warning')),
+																	_1: {ctor: '[]'}
+																}
+															}
+														},
+														{ctor: '[]'}),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Yellow'),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$label,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$input,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$name('background'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$type_('radio'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onClick(
+																			_user$project$Main$UpdateColor('is-danger')),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															},
+															{ctor: '[]'}),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Red'),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$label,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$input,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$name('background'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$type_('radio'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Events$onClick(
+																				_user$project$Main$UpdateColor('is-light')),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Grey'),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
