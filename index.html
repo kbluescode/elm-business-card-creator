@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
+    <style>
+      #title {
+        height: 300px;
+        width: 600px;
+        padding: 50px;
+        margin: 0 auto;
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section">
+      <div id="main" class="container"></div>
+    </section>
+    <script src="helloworld.js"></script>
+    <script>
+      var node = document.getElementById("main")
+      var app = Elm.Main.embed(node)
+    </script>
+  </body>
+</html>
