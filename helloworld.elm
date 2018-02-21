@@ -53,6 +53,10 @@ view model =
       , text "Black"
       ]
       , label []
+      [ input [ name "background", type_ "radio", onClick (UpdateColor "is-info") ] []
+      , text "Blue"  
+      ]
+      , label []
       [ input [ name "background", type_ "radio", onClick (UpdateColor "is-success") ] []
       , text "Green"  
       ]

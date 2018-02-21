@@ -8503,7 +8503,7 @@ var _user$project$Main$view = function (model) {
 															_1: {
 																ctor: '::',
 																_0: _elm_lang$html$Html_Events$onClick(
-																	_user$project$Main$UpdateColor('is-success')),
+																	_user$project$Main$UpdateColor('is-info')),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -8511,7 +8511,7 @@ var _user$project$Main$view = function (model) {
 													{ctor: '[]'}),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Green'),
+													_0: _elm_lang$html$Html$text('Blue'),
 													_1: {ctor: '[]'}
 												}
 											}),
@@ -8533,7 +8533,7 @@ var _user$project$Main$view = function (model) {
 																_1: {
 																	ctor: '::',
 																	_0: _elm_lang$html$Html_Events$onClick(
-																		_user$project$Main$UpdateColor('is-warning')),
+																		_user$project$Main$UpdateColor('is-success')),
 																	_1: {ctor: '[]'}
 																}
 															}
@@ -8541,7 +8541,7 @@ var _user$project$Main$view = function (model) {
 														{ctor: '[]'}),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('Yellow'),
+														_0: _elm_lang$html$Html$text('Green'),
 														_1: {ctor: '[]'}
 													}
 												}),
@@ -8563,7 +8563,7 @@ var _user$project$Main$view = function (model) {
 																	_1: {
 																		ctor: '::',
 																		_0: _elm_lang$html$Html_Events$onClick(
-																			_user$project$Main$UpdateColor('is-danger')),
+																			_user$project$Main$UpdateColor('is-warning')),
 																		_1: {ctor: '[]'}
 																	}
 																}
@@ -8571,7 +8571,7 @@ var _user$project$Main$view = function (model) {
 															{ctor: '[]'}),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('Red'),
+															_0: _elm_lang$html$Html$text('Yellow'),
 															_1: {ctor: '[]'}
 														}
 													}),
@@ -8593,7 +8593,7 @@ var _user$project$Main$view = function (model) {
 																		_1: {
 																			ctor: '::',
 																			_0: _elm_lang$html$Html_Events$onClick(
-																				_user$project$Main$UpdateColor('is-light')),
+																				_user$project$Main$UpdateColor('is-danger')),
 																			_1: {ctor: '[]'}
 																		}
 																	}
@@ -8601,11 +8601,42 @@ var _user$project$Main$view = function (model) {
 																{ctor: '[]'}),
 															_1: {
 																ctor: '::',
-																_0: _elm_lang$html$Html$text('Grey'),
+																_0: _elm_lang$html$Html$text('Red'),
 																_1: {ctor: '[]'}
 															}
 														}),
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$label,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$input,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$name('background'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$type_('radio'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Events$onClick(
+																					_user$project$Main$UpdateColor('is-light')),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Grey'),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
 												}
 											}
 										}
