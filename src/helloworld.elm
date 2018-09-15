@@ -1,15 +1,16 @@
+import Browser
 import Html exposing (..)
 import Html.Attributes exposing (placeholder, class, id, type_, checked, name)
 import Html.Events exposing (onInput, onClick)
 
 -- Program
-main : Program Never Model Msg
-main = Html.beginnerProgram { model = model, view = view, update = update }
+-- main : Program Never Model Msg
+main = Browser.sandbox { init = init, view = view, update = update }
 
 -- Model
 type alias Model = { title : String, phone_number : String, description : String, color : String }
-model : Model
-model = 
+init : Model
+init = 
   { title = "Derp Derpington"
     , phone_number = "(555) 555-5555"
     , description = "Attorney at Law."
