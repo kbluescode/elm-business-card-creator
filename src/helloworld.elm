@@ -60,49 +60,70 @@ changeForm : Html Msg
 changeForm = 
   form []
   [ 
-    input [ class "input", placeholder "Name", onInput UpdateTitle ] []
-    , input [ class "input", placeholder "Phone Number", onInput UpdatePhoneNum ] []
-    , input [ class "input", placeholder "Description", onInput UpdateDescription ] [] 
+    div [ class "field" ] [
+      label [ class "label" ] [ text "Name" ]
+      , div [ class "control" ] [
+        input [ class "input", placeholder "Name", onInput UpdateTitle ] []
+      ]
+    ]
+    , div [ class "field" ] [
+      label [ class "label" ] [ text "Phone Number" ]
+      , div [ class "control" ] [
+        input [ class "input", placeholder "Phone Number", onInput UpdatePhoneNum ] []
+      ]
+    ]
+    , div [ class "field" ] [
+      label [ class "label" ] [ text "Description" ]
+      , div [ class "control" ] [
+        input [ class "input", placeholder "Description", onInput UpdateDescription ] [] 
+      ]
+    ]
+    , colorSelector
   ]
 
 colorSelector : Html Msg
 colorSelector =
-  fieldset []
-    [ label []
-      [ input [ name "background", checked True, type_ "radio", onClick (UpdateColor "is-dark") ] []
-      , text "Black"
+  div [ class "field" ] [
+    label [ class "label" ] [ text "Color" ]
+    , fieldset [] [ 
+        div [ class "control" ] [
+          label [ class "radio" ] [ 
+            input [ name "background", checked True, type_ "radio", onClick (UpdateColor "is-dark") ] []
+            , text "Black"
+          ]
+          , label [ class "radio" ]
+          [ input [ name "background", type_ "radio", onClick (UpdateColor "is-info") ] []
+          , text "Blue"  
+          ]
+          , label [ class "radio" ]
+          [ input [ name "background", type_ "radio", onClick (UpdateColor "is-success") ] []
+          , text "Green"  
+          ]
+          , label [ class "radio" ]
+          [ input [ name "background", type_ "radio", onClick (UpdateColor "is-warning") ] []
+          , text "Yellow"  
+          ]
+          , label [ class "radio" ]
+          [ input [ name "background", type_ "radio", onClick (UpdateColor "is-danger") ] []
+          , text "Red"  
+          ]
+          , label [ class "radio" ]
+          [ input [ name "background", type_ "radio", onClick (UpdateColor "is-light") ] []
+          , text "Grey"  
+          ]
+        ]
       ]
-      , label []
-      [ input [ name "background", type_ "radio", onClick (UpdateColor "is-info") ] []
-      , text "Blue"  
-      ]
-      , label []
-      [ input [ name "background", type_ "radio", onClick (UpdateColor "is-success") ] []
-      , text "Green"  
-      ]
-      , label []
-      [ input [ name "background", type_ "radio", onClick (UpdateColor "is-warning") ] []
-      , text "Yellow"  
-      ]
-      , label []
-      [ input [ name "background", type_ "radio", onClick (UpdateColor "is-danger") ] []
-      , text "Red"  
-      ]
-      , label []
-      [ input [ name "background", type_ "radio", onClick (UpdateColor "is-light") ] []
-      , text "Grey"  
-      ]
-    ]
+  ]
 
 view : Model -> Html Msg
 view model =
-  section [] 
+  section [ class "container" ] 
   [
     heroPane model
+    , br [] []
+    , h1[ class "title is-4" ] [ text "Business Card Creator" ]
     , hr [] []
-    , h1[ class "title is-4" ] [ text "Business Card Creator:" ]
     , changeForm
-    , colorSelector
   ]
 
 -- Util
@@ -112,5 +133,15 @@ formattedNumber number =
     firstNum = String.slice 0 3 number
     secondNum = String.slice 3 6 number
     thirdNum = String.slice 6 10 number
+    firstPart = "(" ++ firstNum ++ ")"
+    secondPart = firstPart ++ " " ++ secondNum
+    thirdPart = secondPart ++ "-" ++ thirdNum
   in
-    "(" ++ firstNum ++ ")" ++ " " ++ secondNum ++ "-" ++ thirdNum
+    if firstNum == "" then
+      ""
+    else if secondNum == "" then
+      firstPart
+    else if thirdNum == "" then
+      secondPart
+    else
+      thirdPart

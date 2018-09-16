@@ -4371,6 +4371,7 @@ var elm$core$Set$toList = function (_n0) {
 	return elm$core$Dict$keys(dict);
 };
 var elm$core$Basics$append = _Utils_append;
+var elm$core$Basics$eq = _Utils_equal;
 var elm$core$Maybe$Just = function (a) {
 	return {$: 'Just', a: a};
 };
@@ -4380,7 +4381,10 @@ var author$project$Main$formattedNumber = function (number) {
 	var thirdNum = A3(elm$core$String$slice, 6, 10, number);
 	var secondNum = A3(elm$core$String$slice, 3, 6, number);
 	var firstNum = A3(elm$core$String$slice, 0, 3, number);
-	return '(' + (firstNum + (')' + (' ' + (secondNum + ('-' + thirdNum)))));
+	var firstPart = '(' + (firstNum + ')');
+	var secondPart = firstPart + (' ' + secondNum);
+	var thirdPart = secondPart + ('-' + thirdNum);
+	return (firstNum === '') ? '' : ((secondNum === '') ? firstPart : ((thirdNum === '') ? secondPart : thirdPart));
 };
 var author$project$Main$update = F2(
 	function (msg, model) {
@@ -4418,11 +4422,14 @@ var author$project$Main$UpdatePhoneNum = function (a) {
 var author$project$Main$UpdateTitle = function (a) {
 	return {$: 'UpdateTitle', a: a};
 };
+var author$project$Main$UpdateColor = function (a) {
+	return {$: 'UpdateColor', a: a};
+};
+var elm$core$Basics$True = {$: 'True'};
 var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var elm$core$Basics$False = {$: 'False'};
-var elm$core$Basics$True = {$: 'True'};
 var elm$core$Result$isOk = function (result) {
 	if (result.$ === 'Ok') {
 		return true;
@@ -4501,7 +4508,6 @@ var elm$core$Basics$apR = F2(
 	function (x, f) {
 		return f(x);
 	});
-var elm$core$Basics$eq = _Utils_equal;
 var elm$core$Tuple$first = function (_n0) {
 	var x = _n0.a;
 	return x;
@@ -4826,8 +4832,21 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
-var elm$html$Html$form = _VirtualDom_node('form');
+var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$fieldset = _VirtualDom_node('fieldset');
 var elm$html$Html$input = _VirtualDom_node('input');
+var elm$html$Html$label = _VirtualDom_node('label');
+var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var elm$json$Json$Encode$bool = _Json_wrap;
+var elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$bool(bool));
+	});
+var elm$html$Html$Attributes$checked = elm$html$Html$Attributes$boolProperty('checked');
 var elm$json$Json$Encode$string = _Json_wrap;
 var elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -4837,6 +4856,181 @@ var elm$html$Html$Attributes$stringProperty = F2(
 			elm$json$Json$Encode$string(string));
 	});
 var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
+var elm$html$Html$Attributes$name = elm$html$Html$Attributes$stringProperty('name');
+var elm$html$Html$Attributes$type_ = elm$html$Html$Attributes$stringProperty('type');
+var elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		elm$html$Html$Events$on,
+		'click',
+		elm$json$Json$Decode$succeed(msg));
+};
+var author$project$Main$colorSelector = A2(
+	elm$html$Html$div,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('field')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$label,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class('label')
+				]),
+			_List_fromArray(
+				[
+					elm$html$Html$text('Color')
+				])),
+			A2(
+			elm$html$Html$fieldset,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$div,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('control')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$label,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('radio')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$input,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$name('background'),
+											elm$html$Html$Attributes$checked(true),
+											elm$html$Html$Attributes$type_('radio'),
+											elm$html$Html$Events$onClick(
+											author$project$Main$UpdateColor('is-dark'))
+										]),
+									_List_Nil),
+									elm$html$Html$text('Black')
+								])),
+							A2(
+							elm$html$Html$label,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('radio')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$input,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$name('background'),
+											elm$html$Html$Attributes$type_('radio'),
+											elm$html$Html$Events$onClick(
+											author$project$Main$UpdateColor('is-info'))
+										]),
+									_List_Nil),
+									elm$html$Html$text('Blue')
+								])),
+							A2(
+							elm$html$Html$label,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('radio')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$input,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$name('background'),
+											elm$html$Html$Attributes$type_('radio'),
+											elm$html$Html$Events$onClick(
+											author$project$Main$UpdateColor('is-success'))
+										]),
+									_List_Nil),
+									elm$html$Html$text('Green')
+								])),
+							A2(
+							elm$html$Html$label,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('radio')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$input,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$name('background'),
+											elm$html$Html$Attributes$type_('radio'),
+											elm$html$Html$Events$onClick(
+											author$project$Main$UpdateColor('is-warning'))
+										]),
+									_List_Nil),
+									elm$html$Html$text('Yellow')
+								])),
+							A2(
+							elm$html$Html$label,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('radio')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$input,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$name('background'),
+											elm$html$Html$Attributes$type_('radio'),
+											elm$html$Html$Events$onClick(
+											author$project$Main$UpdateColor('is-danger'))
+										]),
+									_List_Nil),
+									elm$html$Html$text('Red')
+								])),
+							A2(
+							elm$html$Html$label,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('radio')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									elm$html$Html$input,
+									_List_fromArray(
+										[
+											elm$html$Html$Attributes$name('background'),
+											elm$html$Html$Attributes$type_('radio'),
+											elm$html$Html$Events$onClick(
+											author$project$Main$UpdateColor('is-light'))
+										]),
+									_List_Nil),
+									elm$html$Html$text('Grey')
+								]))
+						]))
+				]))
+		]));
+var elm$html$Html$form = _VirtualDom_node('form');
 var elm$html$Html$Attributes$placeholder = elm$html$Html$Attributes$stringProperty('placeholder');
 var elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
@@ -4844,7 +5038,6 @@ var elm$html$Html$Events$alwaysStop = function (x) {
 var elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
 	return {$: 'MayStopPropagation', a: a};
 };
-var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var elm$html$Html$Events$stopPropagationOn = F2(
 	function (event, decoder) {
 		return A2(
@@ -4933,177 +5126,118 @@ var author$project$Main$changeForm = A2(
 	_List_fromArray(
 		[
 			A2(
-			elm$html$Html$input,
+			elm$html$Html$div,
 			_List_fromArray(
 				[
-					elm$html$Html$Attributes$class('input'),
-					elm$html$Html$Attributes$placeholder('Name'),
-					elm$html$Html$Events$onInput(author$project$Main$UpdateTitle)
+					elm$html$Html$Attributes$class('field')
 				]),
-			_List_Nil),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$label,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('label')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('Name')
+						])),
+					A2(
+					elm$html$Html$div,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('control')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$input,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('input'),
+									elm$html$Html$Attributes$placeholder('Name'),
+									elm$html$Html$Events$onInput(author$project$Main$UpdateTitle)
+								]),
+							_List_Nil)
+						]))
+				])),
 			A2(
-			elm$html$Html$input,
+			elm$html$Html$div,
 			_List_fromArray(
 				[
-					elm$html$Html$Attributes$class('input'),
-					elm$html$Html$Attributes$placeholder('Phone Number'),
-					elm$html$Html$Events$onInput(author$project$Main$UpdatePhoneNum)
+					elm$html$Html$Attributes$class('field')
 				]),
-			_List_Nil),
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$label,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('label')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('Phone Number')
+						])),
+					A2(
+					elm$html$Html$div,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('control')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$input,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('input'),
+									elm$html$Html$Attributes$placeholder('Phone Number'),
+									elm$html$Html$Events$onInput(author$project$Main$UpdatePhoneNum)
+								]),
+							_List_Nil)
+						]))
+				])),
 			A2(
-			elm$html$Html$input,
+			elm$html$Html$div,
 			_List_fromArray(
 				[
-					elm$html$Html$Attributes$class('input'),
-					elm$html$Html$Attributes$placeholder('Description'),
-					elm$html$Html$Events$onInput(author$project$Main$UpdateDescription)
+					elm$html$Html$Attributes$class('field')
 				]),
-			_List_Nil)
+			_List_fromArray(
+				[
+					A2(
+					elm$html$Html$label,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('label')
+						]),
+					_List_fromArray(
+						[
+							elm$html$Html$text('Description')
+						])),
+					A2(
+					elm$html$Html$div,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('control')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$input,
+							_List_fromArray(
+								[
+									elm$html$Html$Attributes$class('input'),
+									elm$html$Html$Attributes$placeholder('Description'),
+									elm$html$Html$Events$onInput(author$project$Main$UpdateDescription)
+								]),
+							_List_Nil)
+						]))
+				])),
+			author$project$Main$colorSelector
 		]));
-var author$project$Main$UpdateColor = function (a) {
-	return {$: 'UpdateColor', a: a};
-};
-var elm$html$Html$fieldset = _VirtualDom_node('fieldset');
-var elm$html$Html$label = _VirtualDom_node('label');
-var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var elm$json$Json$Encode$bool = _Json_wrap;
-var elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			elm$json$Json$Encode$bool(bool));
-	});
-var elm$html$Html$Attributes$checked = elm$html$Html$Attributes$boolProperty('checked');
-var elm$html$Html$Attributes$name = elm$html$Html$Attributes$stringProperty('name');
-var elm$html$Html$Attributes$type_ = elm$html$Html$Attributes$stringProperty('type');
-var elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			elm$virtual_dom$VirtualDom$on,
-			event,
-			elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		elm$html$Html$Events$on,
-		'click',
-		elm$json$Json$Decode$succeed(msg));
-};
-var author$project$Main$colorSelector = A2(
-	elm$html$Html$fieldset,
-	_List_Nil,
-	_List_fromArray(
-		[
-			A2(
-			elm$html$Html$label,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$input,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$name('background'),
-							elm$html$Html$Attributes$checked(true),
-							elm$html$Html$Attributes$type_('radio'),
-							elm$html$Html$Events$onClick(
-							author$project$Main$UpdateColor('is-dark'))
-						]),
-					_List_Nil),
-					elm$html$Html$text('Black')
-				])),
-			A2(
-			elm$html$Html$label,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$input,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$name('background'),
-							elm$html$Html$Attributes$type_('radio'),
-							elm$html$Html$Events$onClick(
-							author$project$Main$UpdateColor('is-info'))
-						]),
-					_List_Nil),
-					elm$html$Html$text('Blue')
-				])),
-			A2(
-			elm$html$Html$label,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$input,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$name('background'),
-							elm$html$Html$Attributes$type_('radio'),
-							elm$html$Html$Events$onClick(
-							author$project$Main$UpdateColor('is-success'))
-						]),
-					_List_Nil),
-					elm$html$Html$text('Green')
-				])),
-			A2(
-			elm$html$Html$label,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$input,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$name('background'),
-							elm$html$Html$Attributes$type_('radio'),
-							elm$html$Html$Events$onClick(
-							author$project$Main$UpdateColor('is-warning'))
-						]),
-					_List_Nil),
-					elm$html$Html$text('Yellow')
-				])),
-			A2(
-			elm$html$Html$label,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$input,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$name('background'),
-							elm$html$Html$Attributes$type_('radio'),
-							elm$html$Html$Events$onClick(
-							author$project$Main$UpdateColor('is-danger'))
-						]),
-					_List_Nil),
-					elm$html$Html$text('Red')
-				])),
-			A2(
-			elm$html$Html$label,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					elm$html$Html$input,
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$name('background'),
-							elm$html$Html$Attributes$type_('radio'),
-							elm$html$Html$Events$onClick(
-							author$project$Main$UpdateColor('is-light'))
-						]),
-					_List_Nil),
-					elm$html$Html$text('Grey')
-				]))
-		]));
-var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$h1 = _VirtualDom_node('h1');
 var elm$html$Html$p = _VirtualDom_node('p');
 var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
@@ -5149,16 +5283,20 @@ var author$project$Main$heroPane = function (model) {
 					]))
 			]));
 };
+var elm$html$Html$br = _VirtualDom_node('br');
 var elm$html$Html$hr = _VirtualDom_node('hr');
 var elm$html$Html$section = _VirtualDom_node('section');
 var author$project$Main$view = function (model) {
 	return A2(
 		elm$html$Html$section,
-		_List_Nil,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('container')
+			]),
 		_List_fromArray(
 			[
 				author$project$Main$heroPane(model),
-				A2(elm$html$Html$hr, _List_Nil, _List_Nil),
+				A2(elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
 				elm$html$Html$h1,
 				_List_fromArray(
@@ -5167,10 +5305,10 @@ var author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						elm$html$Html$text('Business Card Creator:')
+						elm$html$Html$text('Business Card Creator')
 					])),
-				author$project$Main$changeForm,
-				author$project$Main$colorSelector
+				A2(elm$html$Html$hr, _List_Nil, _List_Nil),
+				author$project$Main$changeForm
 			]));
 };
 var elm$core$Platform$Cmd$batch = _Platform_batch;
