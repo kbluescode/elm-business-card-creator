@@ -4,11 +4,21 @@ import Html.Attributes exposing (placeholder, class, id, type_, checked, name)
 import Html.Events exposing (onInput, onClick)
 
 -- Program
--- main : Program Never Model Msg
-main = Browser.sandbox { init = init, view = view, update = update }
+main : Program () Model Msg
+main = Browser.sandbox { 
+  init = init
+  , view = view
+  , update = update
+  }
 
 -- Model
-type alias Model = { title : String, phone_number : String, description : String, color : String }
+type alias Model = { 
+  title : String
+  , phone_number : String
+  , description : String
+  , color : String
+  }
+
 init : Model
 init = 
   { title = "Derp Derpington"
@@ -32,7 +42,7 @@ update msg model =
     UpdateDescription description ->
       { model | description = description }
     UpdatePhoneNum number ->
-      { model | phone_number = number }
+      { model | phone_number = formattedNumber number }
     UpdateColor color ->
       { model | color = color }
 
@@ -84,7 +94,6 @@ colorSelector =
       ]
     ]
 
-
 view : Model -> Html Msg
 view model =
   section [] 
@@ -95,3 +104,13 @@ view model =
     , changeForm
     , colorSelector
   ]
+
+-- Util
+formattedNumber : String -> String
+formattedNumber number =
+  let 
+    firstNum = String.slice 0 3 number
+    secondNum = String.slice 3 6 number
+    thirdNum = String.slice 6 10 number
+  in
+    "(" ++ firstNum ++ ")" ++ " " ++ secondNum ++ "-" ++ thirdNum
