@@ -1,0 +1,17 @@
+#title {
+  height: 300px;
+  width: 600px;
+  padding: 50px;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+
+fieldset {
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  align-items: center;
+  padding-bottom: calc(0.375em - 1px);
+  padding-left: calc(0.625em - 1px);
+  padding-right: calc(0.625em - 1px);
+  padding-top: calc(0.375em - 1px);
+}
