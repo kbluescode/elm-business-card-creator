@@ -1,7 +1,10 @@
+module Main exposing (..)
+
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (placeholder, class, id, type_, checked, name)
 import Html.Events exposing (onInput, onClick)
+import Util exposing (formattedNumber, spaceFilter)
 
 -- Program
 main : Program () Model Msg
@@ -20,13 +23,13 @@ type alias Model = {
   }
 
 init : Model
-init = 
-  { title = "Derp Derpington"
-    , phone_number = "(555) 555-5555"
-    , description = "Attorney at Law."
-    , color = "is-dark" 
+init = { 
+  title = "Derp Derpington"
+  , phone_number = "(555) 555-5555"
+  , description = "Attorney at Law."
+  , color = "is-dark" 
   }
-
+  
 -- Update
 type Msg 
   = UpdateTitle String 
@@ -125,23 +128,3 @@ view model =
     , hr [] []
     , changeForm
   ]
-
--- Util
-formattedNumber : String -> String
-formattedNumber number =
-  let 
-    firstNum = String.slice 0 3 number
-    secondNum = String.slice 3 6 number
-    thirdNum = String.slice 6 10 number
-    firstPart = "(" ++ firstNum ++ ")"
-    secondPart = firstPart ++ " " ++ secondNum
-    thirdPart = secondPart ++ "-" ++ thirdNum
-  in
-    if firstNum == "" then
-      ""
-    else if secondNum == "" then
-      firstPart
-    else if thirdNum == "" then
-      secondPart
-    else
-      thirdPart

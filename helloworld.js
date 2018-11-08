@@ -4370,16 +4370,29 @@ var elm$core$Set$toList = function (_n0) {
 	var dict = _n0.a;
 	return elm$core$Dict$keys(dict);
 };
-var elm$core$Basics$append = _Utils_append;
-var elm$core$Basics$eq = _Utils_equal;
+var elm$core$Basics$neq = _Utils_notEqual;
 var elm$core$Maybe$Just = function (a) {
 	return {$: 'Just', a: a};
 };
 var elm$core$Maybe$Nothing = {$: 'Nothing'};
+var elm$core$String$filter = _String_filter;
+var author$project$Util$spaceFilter = function (string) {
+	return A2(
+		elm$core$String$filter,
+		function (_char) {
+			return !_Utils_eq(
+				_char,
+				_Utils_chr(' '));
+		},
+		string);
+};
+var elm$core$Basics$append = _Utils_append;
+var elm$core$Basics$eq = _Utils_equal;
 var elm$core$String$slice = _String_slice;
-var author$project$Main$formattedNumber = function (number) {
-	var thirdNum = A3(elm$core$String$slice, 6, 10, number);
+var author$project$Util$formattedNumber = function (base) {
+	var number = author$project$Util$spaceFilter(base);
 	var secondNum = A3(elm$core$String$slice, 3, 6, number);
+	var thirdNum = A3(elm$core$String$slice, 6, 10, number);
 	var firstNum = A3(elm$core$String$slice, 0, 3, number);
 	var firstPart = '(' + (firstNum + ')');
 	var secondPart = firstPart + (' ' + secondNum);
@@ -4404,7 +4417,7 @@ var author$project$Main$update = F2(
 				return _Utils_update(
 					model,
 					{
-						phone_number: author$project$Main$formattedNumber(number)
+						phone_number: author$project$Util$formattedNumber(number)
 					});
 			default:
 				var color = msg.a;
